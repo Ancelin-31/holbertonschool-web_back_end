@@ -1,0 +1,5 @@
+// Adds an attribute to a document
+db.school.update(
+    {"_id" : ObjectId("689c801a14f80a8b391e45bd"), "name" : "Holberton school"},
+    {'$set': {"address":"972 Mission street"}}
+)
