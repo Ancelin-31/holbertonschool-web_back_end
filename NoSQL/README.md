@@ -1,0 +1,1 @@
+This project is meant to teach us how to use MongoDB
