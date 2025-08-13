@@ -1,0 +1,2 @@
+// Finds a file named "Holberton School" in "school" collection
+db.school.find({ name: "Holberton school" })
