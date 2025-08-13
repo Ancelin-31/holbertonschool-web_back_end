@@ -1,3 +1,2 @@
-#!/usr/bin/env bash
-
-docker exec -it my_mongo mongo --quiet --eval "show dbs"
+// Lists all databases
+show dbs
