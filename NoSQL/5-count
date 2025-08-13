@@ -1,0 +1,2 @@
+// Counts all files in school collection
+db.school.CountDocuments()
