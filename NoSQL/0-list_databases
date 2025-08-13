@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-docker run --rm --network="host" mongo:3.6 mongo --quiet --eval "db.adminCommand('listDatabases').databases.forEach(function(db) { print(db.name + '\t' + (db.sizeOnDisk / (1024*1024*1024)).toFixed(3) + 'GB'); })"
+
+docker exec -it my_mongo mongo --quiet --eval "show dbs"
