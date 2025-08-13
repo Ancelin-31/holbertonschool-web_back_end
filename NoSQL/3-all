@@ -1,0 +1,2 @@
+// Lists all files in school collection
+db.school.find()
