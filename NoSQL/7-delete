@@ -1,4 +1,4 @@
-// Adds an attribute to a document
+// Deletes all documents of given name
 db.school.deleteMany(
     {"name" : "Holberton school"}
 )
