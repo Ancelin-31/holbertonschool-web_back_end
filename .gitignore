@@ -3,6 +3,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
+*.tgz*
 
 # C extensions
 *.so
@@ -206,3 +207,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# MongoDB
+*mongo*
+bsondump
+*LICENSE*
+MPL-2
+*NOTICE*
