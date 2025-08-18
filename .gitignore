@@ -214,3 +214,7 @@ bsondump
 *LICENSE*
 MPL-2
 *NOTICE*
+
+# Nodejs
+*node_modules*
+*main.js
