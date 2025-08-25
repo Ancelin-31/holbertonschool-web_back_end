@@ -1,4 +1,10 @@
 export default function getResponseFromAPI() {
-    const response = new Promise;
+    const response = new Promise((resolveOuter) => {
+        resolveOuter(
+            new Promise((resolveInner) => {
+            setTimeout(resolveInner, 1000);
+    }),
+  );
+});;
     return response;
 }
