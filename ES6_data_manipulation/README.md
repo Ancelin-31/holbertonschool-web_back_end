@@ -1,0 +1,1 @@
+This project is about using requests to interact with databases in ES6
