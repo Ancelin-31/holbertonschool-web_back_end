@@ -1,43 +1,42 @@
-const fs = require('node:fs/promises');
+const fs = require('fs');
 
 async function countStudents(path) {
-  let output = '';
-  let data = '';
-
-  try {
-    data = await fs.readFile(path, { encoding: 'utf8' });
-  } catch (err) {
-    throw new Error('Cannot load the database');
-  }
-
-  const dataArr = data.split('\n');
-  const studentArr = dataArr.filter((elm) => elm !== dataArr[0] && elm !== '');
-  const studentKeys = dataArr[0].split(',');
-
-  const studentDict = studentArr.map((line) => {
-    const object = line.split(',');
-    return Object.fromEntries(
-      studentKeys.map((key, index) => [key, object[index]]),
-    );
+  const myPromise = new Promise((resolve, reject) => {
+    fs.readFile(path, 'utf8', (err, data) => {
+      if (err) {
+        reject(new Error('Cannot load the database'));
+      }
+      resolve(data);
+    });
   });
 
-  const byField = studentDict.reduce((accumulator, student) => {
-    const { field } = student;
-    const { firstname } = student;
-    if (!accumulator[field]) {
-      accumulator[field] = [];
+  return myPromise.then((data) => {
+    const content = data.split('\n');
+    const fields = {};
+    let total = 0;
+
+    for (let i = 1; i < content.length; i += 1) {
+      const [firstname, , , field] = content[i].split(',');
+
+      if (!(field in fields) && field) {
+        fields[field] = [];
+      }
+
+      if (field) {
+        fields[field].push(firstname);
+        total += 1;
+      }
     }
-    accumulator[field].push(firstname);
-    return accumulator;
-  }, {});
 
-  output = `Number of students: ${studentArr.length}`;
-  for (const [key, value] of Object.entries(byField)) {
-    output += `\nNumber of students in ${key}: ${value.length}. List: ${value.join(', ')}`;
-  }
+    let result = `Number of students: ${total}`;
 
-  console.log(output);
-  return output;
+    for (const [key] of Object.entries(fields)) {
+      result = result + `\nNumber of students in ${key}: ${fields[key].length}. List: ${fields[key].join(', ')}`;
+    }
+
+    console.log(result);
+    return result;
+  });
 }
 
 module.exports = countStudents;
